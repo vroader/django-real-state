@@ -42,7 +42,7 @@ class PropertySerializer(serializers.ModelSerializer):
         def get_user(self, obj):
             return obj.user.username
         
-class PropertyViewsSerializer(serializers.ModelSerializer):
+class PropertyCreateSerializer(serializers.ModelSerializer):
     country= CountryField(name_only=True)
     
     class Meta:
