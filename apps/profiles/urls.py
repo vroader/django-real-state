@@ -11,4 +11,3 @@ urlpatterns = [
     path("agents/all/", AgentListAPIView.as_view(), name="all-agents"),
     path("top-agents/all/", TopAgentsListAPIView.as_view(), name="top-agents"),
 ]
-

@@ -1,11 +1,13 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from real_estate.settings.base import AUTH_USER_MODEL
+
 from apps.common.models import TimeStampedUUIDModel
 from apps.profiles.models import Profile
+from real_estate.settings.base import AUTH_USER_MODEL
+
 
 class Rating(TimeStampedUUIDModel):
-    
+
     class Range(models.IntegerChoices):
         RANGE_1 = 1, _("RUIM")
         RANGE_2 = 2, _("REGULAR")
@@ -29,7 +31,7 @@ class Rating(TimeStampedUUIDModel):
     rating = models.IntegerField(
         verbose_name=_("Avaliação"),
         choices=Range.choices,
-        help_text= "1=Ruim, 2=Regular, 3=Bom, 4=Muito Bom, 5=Excelente",
+        help_text="1=Ruim, 2=Regular, 3=Bom, 4=Muito Bom, 5=Excelente",
         default=0,
     )
     comment = models.TextField(

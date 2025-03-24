@@ -5,10 +5,11 @@ from django.apps import AppConfig
    Permitindo que o Django execute automaticamente a criação de um
    perfil quando um usuário for criado
 '''
+
+
 class ProfilesConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'apps.profiles'
 
     def ready(self):
         from apps.profiles import signals
-
