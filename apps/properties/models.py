@@ -40,19 +40,22 @@ class Property(TimeStampedUUIDModel):
         user,
         verbose_name=("Agent, Seller or Buyer"),
         related_name="agent_buyer",
-        on_delete=models.DO_NOTHING
+        on_delete=models.DO_NOTHING,
     )
 
     title = models.CharField(verbose_name=_("Property Title"), max_length=250)
     slug = AutoSlugField(
-        populate_from="title", unique=True, always_update=True,
-        editable=True, blank=True
+        populate_from="title",
+        unique=True,
+        always_update=True,
+        editable=True,
+        blank=True,
     )
     ref_code = models.CharField(
         verbose_name=_("Porperty Reference Code"),
         max_length=255,
         unique=True,
-        blank=True
+        blank=True,
     )
     description = models.TextField(
         verbose_name=_("Descriprion"),
@@ -63,71 +66,66 @@ class Property(TimeStampedUUIDModel):
         default="BR",
         blank_label="(Select a country)",
     )
-    city = models.CharField(verbose_name=_("City"), max_length=180,
-                            default="Brasilia")
+    city = models.CharField(verbose_name=_("City"), max_length=180, default="Brasilia")
     postal_code = models.CharField(
-        verbose_name=_("Postal Code"), max_length=100, default="140")
+        verbose_name=_("Postal Code"), max_length=100, default="140"
+    )
     street_address = models.CharField(
-        verbose_name=_("Street Address"), max_length=150, default="Quadra 1")
+        verbose_name=_("Street Address"), max_length=150, default="Quadra 1"
+    )
     property_number = models.IntegerField(
         verbose_name=_("Property Number"),
         validators=[MinValueValidator(1)],
         default=122,
     )
     price = models.DecimalField(
-        verbose_name=_("Price"), max_digits=8, decimal_places=2, default=0.0)
+        verbose_name=_("Price"), max_digits=8, decimal_places=2, default=0.0
+    )
     tax = models.DecimalField(
         verbose_name=_("Property Tax"),
         max_digits=6,
         decimal_places=2,
-        default=0.15, help_text="15% property tax charged",
+        default=0.15,
+        help_text="15% property tax charged",
     )
     plot_area = models.DecimalField(
-        verbose_name=_("Plot Area m^2"),
-        max_digits=8, decimal_places=2, default=0.0)
+        verbose_name=_("Plot Area m^2"), max_digits=8, decimal_places=2, default=0.0
+    )
     total_floors = models.IntegerField(verbose_name=_("Number of Floors"), default=0)
     bedrooms = models.IntegerField(verbose_name=_("Bedrooms"), default=1)
     bathrooms = models.DecimalField(
-        verbose_name=_("Bathrooms"), max_digits=4, decimal_places=2, default=1.0)
+        verbose_name=_("Bathrooms"), max_digits=4, decimal_places=2, default=1.0
+    )
     advert_type = models.CharField(
         verbose_name=_("Advert Type"),
         max_length=50,
         choices=AdvertType.choices,
-        default=AdvertType.FOR_SALE)
+        default=AdvertType.FOR_SALE,
+    )
     property_type = models.CharField(
         verbose_name=_("Property Type"),
         max_length=50,
         choices=PropertyType.choices,
-        default=PropertyType.OTHER)
+        default=PropertyType.OTHER,
+    )
     cover_photo = models.ImageField(
-        verbose_name=_("Main Photo"),
-        default="/house_sample.jpg", null=True, blank=True)
+        verbose_name=_("Main Photo"), default="/house_sample.jpg", null=True, blank=True
+    )
     photo1 = models.ImageField(
-        verbose_name=_("Photo 1"),
-        default="/interior_sample.jpg",
-        null=True,
-        blank=True
+        verbose_name=_("Photo 1"), default="/interior_sample.jpg", null=True, blank=True
     )
     photo2 = models.ImageField(
-        verbose_name=_("Photo 2"),
-        default="/exterior_sample.jpg",
-        null=True,
-        blank=True
+        verbose_name=_("Photo 2"), default="/exterior_sample.jpg", null=True, blank=True
     )
     photo3 = models.ImageField(
-        verbose_name=_("Photo 3"),
-        default="/bedroom_sample.jpg",
-        null=True,
-        blank=True
+        verbose_name=_("Photo 3"), default="/bedroom_sample.jpg", null=True, blank=True
     )
     photo4 = models.ImageField(
-        verbose_name=_("Photo 4"),
-        default="/bathroom_sample.jpg",
-        null=True,
-        blank=True
+        verbose_name=_("Photo 4"), default="/bathroom_sample.jpg", null=True, blank=True
     )
     published_status = models.BooleanField(
-        verbose_name=_("Published Status"), default=False)
+        verbose_name=_("Published Status"), default=False
+    )
     views = models.IntegerField(verbose_name=_("Total Views"), default=0)
     objects = models.Manager()
     published = PropertyPublishedManager()
@@ -159,11 +157,13 @@ class Property(TimeStampedUUIDModel):
 class PropertyViews(TimeStampedUUIDModel):
     ip = models.CharField(verbose_name=_("IP Address"), max_length=250)
     property = models.ForeignKey(
-        Property, related_name="property_views", on_delete=models.CASCADE)
+        Property, related_name="property_views", on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return (
-            f"Total views on - {self.property.title} is - {self.property.views} view(s)")
+            f"Total views on - {self.property.title} is - {self.property.views} view(s)"
+        )
 
     class Meta:
         verbose_name = "Total Views on property"

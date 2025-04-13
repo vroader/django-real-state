@@ -3,39 +3,21 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path("all/", views.ListAllPropertiesAPIView.as_view(), name="all-properties"),
     path(
-        "all/",
-        views.ListAllPropertiesAPIView.as_view(),
-        name="all-properties"
+        "agents/", views.ListAgentsPropertiesAPIView.as_view(), name="agents-properties"
     ),
-    path(
-        "agents/",
-        views.ListAgentsPropertiesAPIView.as_view(),
-        name="agents-properties"
-    ),
-    path(
-        "create/",
-        views.create_property_api_view,
-        name="property-create"
-    ),
+    path("create/", views.create_property_api_view, name="property-create"),
     path(
         "details/<slug:slug>/",
         views.PropertyDetailView.as_view(),
-        name="property_detail"
+        name="property_detail",
     ),
     path(
         "update/<slug:slug>/",
         views.update_property_api_view,
-        name="update-property-api"
+        name="update-property-api",
     ),
-    path(
-        "delete/<slug:slug>/",
-        views.delete_property_api_view,
-        name="delete-property"
-    ),
-    path(
-        "search/",
-        views.PropertySearchAPIView.as_view(),
-        name="property-search"
-    ),
+    path("delete/<slug:slug>/", views.delete_property_api_view, name="delete-property"),
+    path("search/", views.PropertySearchAPIView.as_view(), name="property-search"),
 ]

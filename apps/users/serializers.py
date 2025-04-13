@@ -27,12 +27,12 @@ class UserSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "full_name",
-            'gender',
-            'phone_number',
-            'profile_photo',
-            'country',
-            'city',
-            'top_seller',
+            "gender",
+            "phone_number",
+            "profile_photo",
+            "country",
+            "city",
+            "top_seller",
         ]
 
     def get_first_name(self, obj):
