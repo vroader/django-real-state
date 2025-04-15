@@ -42,9 +42,10 @@ estate-db:
 test:
 	docker compose exec api pytest -p no:warnings --cov=.
 
+# O sinal de igual para html não está no arquivo makefile do vídeo mas é necessário
+# para o comando funcionar corretamente
 test-html:
-	docker compose exec api pytest -p no:warnings --cov=. --cov-report
-	html
+	docker compose exec api pytest -p no:warnings --cov=. --cov-report=html
 
 flake8:
 	docker compose exec api flake8 .
